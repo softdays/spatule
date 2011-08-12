@@ -18,8 +18,8 @@ Read the [documentation][1] for more information.
 
 ## Licenses
 
-Spatule UI is licensed under the [GNU Generak Public License][5].  
-Spatule API is licensed under the [GNU Lesser Generak Public License][6].
+Spatule UI is licensed under the [GNU General Public License][5].  
+Spatule API is licensed under the [GNU Lesser General Public License][6].
 
 ## Contact
 
