@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swiz:BeanProvider xmlns:fx="http://ns.adobe.com/mxml/2009"
+				   xmlns:mx="library://ns.adobe.com/flex/mx"
+				   xmlns:s="library://ns.adobe.com/flex/spark"
+				   xmlns:swiz="http://swiz.swizframework.org" 
+				   xmlns:local="*" 
+				   xmlns:utils="qs.utils.*"
+				   xmlns:settings="fr.atma.spatule.settings.*" 
+				   xmlns:view="fr.atma.spatule.main.view.*" 
+				   xmlns:model="fr.atma.spatule.main.model.*" xmlns:service="fr.atma.spatule.main.service.*" xmlns:controller="fr.atma.spatule.main.controller.*">
+	<fx:Script>
+		<![CDATA[
+			import fr.atma.spatule.main.model.CalendarModel;
+		]]>
+	</fx:Script>
+	
+	<service:ImputationServiceImpl id="imputationSvc" />
+	<settings:CalendarSettings id="calendarSettings" />
+	<swiz:Prototype type="{CalendarModel}" singleton="true" />
+	<model:CalendarBean id="calendarBean" />
+	<view:CalendarGridBean id="layoutManager" />
+	<controller:MainController id="mainController" />
+
+	
+</swiz:BeanProvider>

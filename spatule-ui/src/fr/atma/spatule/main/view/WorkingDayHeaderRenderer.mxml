@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:GridItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" clipAndEnableScrolling="true">
+	
+	<fx:Script>
+		<![CDATA[
+			import fr.atma.spatule.settings.CalendarSettings;
+			override public function prepare(hasBeenRecycled:Boolean):void 
+			{
+				lblData.text = column.headerText;
+				var col:CalendarGridColumn = column as CalendarGridColumn;
+				if (col.isNextMonth)
+				{
+					bgdSolidColor.color = CalendarSettings.MONTH_2_HEADER_WORKING_DAY_BGD_COLOR;
+				}
+				else
+				{
+					bgdSolidColor.color = CalendarSettings.MONTH_1_HEADER_WORKING_DAY_BGD_COLOR;
+				}
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Rect width="100%" height="100%">
+		<s:fill>
+			<s:SolidColor id="bgdSolidColor" />
+		</s:fill>
+	</s:Rect>
+	
+	<s:Label id="lblData" verticalCenter="1" horizontalCenter="1"/>
+	
+</s:GridItemRenderer>

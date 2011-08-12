@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:GridItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					clipAndEnableScrolling="true">
+	
+	<fx:Script>
+		<![CDATA[
+			override public function prepare(hasBeenRecycled:Boolean):void 
+			{
+				super.prepare(hasBeenRecycled);
+			}
+		]]>
+	</fx:Script>
+	
+	
+	<s:Rect width="100%" height="100%">
+		<s:fill><s:SolidColor color="#999999" /></s:fill>
+	</s:Rect>
+	
+	<s:Image source="@Embed(source='assets/images/sum.png')" verticalCenter="0" horizontalCenter="0"/>
+	
+</s:GridItemRenderer>

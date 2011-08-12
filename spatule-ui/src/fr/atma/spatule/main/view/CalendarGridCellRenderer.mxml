@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:GridItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					clipAndEnableScrolling="true"
+					buttonMode="true"
+					useHandCursor="true" 
+					xmlns:view="fr.atma.spatule.main.view.*"
+					currentState="none">
+	
+	<fx:Script>
+		<![CDATA[
+			import fr.atma.spatule.main.model.vo.CalendarData;
+			import fr.atma.spatule.main.model.vo.Imputation;
+			override public function prepare(hasBeenRecycled:Boolean):void 
+			{
+				var calData:CalendarData = data as CalendarData;
+				// est-ce qu'il y a une imputation à cette date ?
+				var col:CalendarGridColumn = column as CalendarGridColumn;
+				var imputation:Imputation = calData.getImputation(col.date);
+				
+				currentState = "none";
+				
+				if (imputation)
+				{
+					switch(imputation.quota)
+					{
+						case Imputation.HALF:
+						{
+							currentState = "half";
+							break;
+						}
+							
+						case Imputation.WHOLE:
+						{
+							currentState = "whole";
+							break;
+						}
+							
+						default:
+						{
+							break;
+						}
+					}
+				}
+			}
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="none" />
+		<s:State name="half" />
+		<s:State name="whole" />
+	</s:states>
+	
+	<s:Rect id="markerWhole" includeIn="whole"
+			width="67%" 
+			height="70%" 
+			horizontalCenter="0" 
+			verticalCenter="0">
+		<s:fill><s:SolidColor color="#444444"/></s:fill>
+	</s:Rect>
+	
+	<view:Marker id="markerHalf" includeIn="half" />
+
+</s:GridItemRenderer>

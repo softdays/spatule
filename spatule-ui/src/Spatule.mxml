@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:swiz="http://swiz.swizframework.org"
+			   minWidth="955" minHeight="600"
+			   creationComplete="creationCompleteHandler(event)"
+			   xmlns:local="*"
+			   xmlns:vo="fr.atma.spatule.main.model.vo.*"
+			   xmlns:view="fr.atma.spatule.main.view.*">
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" 
+						  paddingBottom="50" 
+						  paddingLeft="50"
+						  paddingRight="50" 
+						  paddingTop="50"/>
+	</s:layout>
+
+	<fx:Script>
+		<![CDATA[
+			import fr.atma.spatule.main.model.events.ApplicationEvent;
+			
+			import mx.events.FlexEvent;
+			
+			[Dispatcher]
+			public var dispatcher:IEventDispatcher;			
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				dispatcher.dispatchEvent(new ApplicationEvent(ApplicationEvent.START));				
+			}
+			
+		]]>
+	</fx:Script>
+	
+	
+	<fx:Declarations>
+		<swiz:Swiz>
+			<swiz:config>
+				<swiz:SwizConfig 
+					eventPackages="fr.atma.spatule.main.model.events"
+					viewPackages="fr.atma.spatule.main.view" />
+			</swiz:config>
+			<swiz:beanProviders>
+				<local:Beans />
+			</swiz:beanProviders>
+			<swiz:loggingTargets>
+				<swiz:SwizTraceTarget id="myTraceTarget" />
+			</swiz:loggingTargets>
+		</swiz:Swiz>
+	</fx:Declarations>
+	
+	<s:Label fontFamily="Courier New" fontSize="18" fontWeight="bold"
+			 text="Spatule Calendar Component"/>
+	
+	<s:Group id="viewNavigator" width="1000" height="100%">
+		<view:CalendarView id="mainView" />
+	</s:Group>
+	
+</s:Application>

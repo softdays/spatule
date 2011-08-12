@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  width="100%" height="100%"
+		  initialize="initializeHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import fr.atma.spatule.main.model.CalendarModel;
+			import fr.atma.spatule.main.model.CalendarBean;
+			import fr.atma.spatule.settings.CalendarSettings;
+			
+			import mx.events.FlexEvent;
+			import mx.events.ItemClickEvent;
+			
+			import qs.utils.DateRange;
+			import qs.utils.TimeZone;
+			
+			import spark.events.IndexChangeEvent;
+			
+			[Inject]
+			public var columnsManager:CalendarGridBean;
+			
+			[Inject]
+			[Bindable] public var calendarModel:CalendarModel;
+			
+			[Inject]			
+			[Bindable] public var calendarSettings:CalendarSettings;
+			
+			[Inject]
+			public var calendarUtils:CalendarBean;
+			
+			private var _tz:TimeZone;
+			
+			[PostConstruct]
+			public function updateLayout():void
+			{
+				calendar.columns = null;
+				var _range:DateRange = null;
+				
+				if (calendarModel.currentLayout == CalendarModel.LAYOUT_FULL_MONTH)
+				{
+					_range = new DateRange(
+						_tz.startOfMonth(calendarModel.currentDate),
+						_tz.endOfMonth(calendarModel.currentDate));
+					calendar.columns = columnsManager.getMonthColumns(_range);
+				} 
+				else
+				{
+					_range = calendarUtils.getWorkingWeeksRange(calendarModel.currentDate);
+					calendar.columns = columnsManager.getWorkingWeeksColumns(_range);
+				}				
+			}
+			
+			protected function initializeHandler(event:FlexEvent):void
+			{
+				_tz = TimeZone.localTimeZone;
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>		
+		<!--s:GridColumn id="projectColumn" dataField="projectName" headerText="Projet"/-->
+		
+		<s:RadioButtonGroup id="radioButtonGroupLayoutType"
+							selectedValue="@{calendarModel.currentLayout}"
+							itemClick="updateLayout()"/>
+	</fx:Declarations>
+	<s:HGroup width="100%" height="30" horizontalAlign="center" verticalAlign="middle">
+		<s:RadioButton label="Semaines pleines" groupName="radioButtonGroupLayoutType"
+					   value="{CalendarModel.LAYOUT_WORKING_WEEKS}"/>
+		<s:RadioButton label="Mois complet" groupName="radioButtonGroupLayoutType"
+					   value="{CalendarModel.LAYOUT_FULL_MONTH}"/>
+		<s:Spacer width="100%" height="100%"/>
+		<s:DropDownList id="currentMonthControl" 
+						change="updateLayout()"
+					dataProvider="{calendarSettings.months}"
+					selectedIndex="@{calendarModel.currentMonth}" />
+		<s:NumericStepper id="currentYearControl"
+						  change="updateLayout()" 
+						  maximum="9999" minimum="1999" 
+						  snapInterval="1"
+						  value="@{calendarModel.currentYear}" />
+	</s:HGroup>
+	
+	<s:DataGrid id="calendar" 
+				width="100%" 
+				dataProvider="{calendarModel.calendarData}" 
+				resizableColumns="false"
+				selectionMode="singleRow" 
+				sortableColumns="false" />
+	
+</s:VGroup>
