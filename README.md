@@ -1,5 +1,5 @@
-Spatule, A collaborative imputations management tool
-===================================================
+Spatule, collaborative imputations management tool
+==================================================
 
 Spatule is a Flex/PHP webapp to manage generic imputations.
 
