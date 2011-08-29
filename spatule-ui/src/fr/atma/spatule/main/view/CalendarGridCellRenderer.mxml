@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:GridItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
-					xmlns:s="library://ns.adobe.com/flex/spark" 
-					clipAndEnableScrolling="true"
-					buttonMode="true"
-					useHandCursor="true" 
+					xmlns:s="library://ns.adobe.com/flex/spark"
 					xmlns:view="fr.atma.spatule.main.view.*"
-					currentState="none">
+					useHandCursor="true" buttonMode="true" 
+					currentState="none"
+					click="clickHandler(event)">
 	
 	<fx:Script>
 		<![CDATA[
+			import fr.atma.spatule.main.model.events.ImputationEvent;
 			import fr.atma.spatule.main.model.vo.CalendarData;
 			import fr.atma.spatule.main.model.vo.Imputation;
+			
+			[Dispatcher]
+			public var dispatcher:IEventDispatcher;		
+			
+			[Bindable]
+			public var borderColor:uint = 0x444444;
+			
 			override public function prepare(hasBeenRecycled:Boolean):void 
 			{
 				var calData:CalendarData = data as CalendarData;
@@ -43,6 +50,35 @@
 					}
 				}
 			}
+			
+			protected function clickHandler(e:MouseEvent):void
+			{
+				trace('clickHandler');
+				var col:CalendarGridColumn = column as CalendarGridColumn;
+				if (col.editable == false) 
+				{
+					e.stopImmediatePropagation();
+					e.stopPropagation();
+					return;
+				}
+				
+				var calData:CalendarData = data as CalendarData;
+				var imputation:Imputation = calData.getImputation(col.date);
+				var event:ImputationEvent = null;
+				if (imputation)
+				{
+					event = new ImputationEvent(ImputationEvent.IMPUTATION_UPDATE);	
+					event.data = imputation;
+				}
+				else
+				{
+					event = new ImputationEvent(ImputationEvent.IMPUTATION_CREATE);	
+					event.data = calData;
+					event.details = col.date;
+				}
+				dispatcher.dispatchEvent(event);
+			}
+			
 		]]>
 	</fx:Script>
 	
@@ -52,14 +88,20 @@
 		<s:State name="whole" />
 	</s:states>
 	
-	<s:Rect id="markerWhole" includeIn="whole"
-			width="67%" 
-			height="70%" 
-			horizontalCenter="0" 
-			verticalCenter="0">
-		<s:fill><s:SolidColor color="#444444"/></s:fill>
+	<s:Rect width="100%" height="100%">
+		<s:fill><s:SolidColor color="white" /></s:fill>
 	</s:Rect>
 	
-	<view:Marker id="markerHalf" includeIn="half" />
-
+	<s:Line xFrom="3" yFrom="3" xTo="{width-8}" yTo="{height-10}" includeIn="whole, half" verticalCenter="0" horizontalCenter="0">
+		<s:stroke>
+			<s:SolidColorStroke color="{borderColor}" weight="2"/>
+		</s:stroke>
+	</s:Line>
+	
+	<s:Line xFrom="3" yFrom="{height-10}" xTo="{width-8}" yTo="3" includeIn="whole" verticalCenter="0" horizontalCenter="0">
+		<s:stroke>
+			<s:SolidColorStroke color="{borderColor}" weight="3"/>
+		</s:stroke>
+	</s:Line>
+	
 </s:GridItemRenderer>

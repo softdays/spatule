@@ -1,5 +1,5 @@
 /*   
- *  Copyright 2011, Remi Patriarche.
+ *  Copyright 2011, Softdays.org
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,9 +21,14 @@ package fr.atma.spatule.main.controller
 	import fr.atma.spatule.main.model.CalendarModel;
 	import fr.atma.spatule.main.model.events.ApplicationEvent;
 	import fr.atma.spatule.main.model.events.ImputationEvent;
+	import fr.atma.spatule.main.model.vo.CalendarData;
+	import fr.atma.spatule.main.model.vo.Imputation;
 	import fr.atma.spatule.main.service.ImputationService;
 	
+	import mx.collections.ArrayCollection;
 	import mx.collections.IList;
+	
+	import spark.components.gridClasses.GridColumn;
 
 	public class MainController
 	{
@@ -52,6 +57,50 @@ package fr.atma.spatule.main.controller
 		public function handleImputationsLoadedEvent(data:IList):void
 		{
 			calendarModel.calendarData = data;
+		}
+		
+		[EventHandler(event="ImputationEvent.IMPUTATION_CREATE", properties="data, details")]
+		public function handleImputationCreateEvent(data:CalendarData, details:Date):void
+		{
+			var status:Number = calendarModel.getStatusForDate(details);
+			if (status == Imputation.WHOLE) return;
+			
+			if (status == Imputation.HALF)
+			{
+				data.addImputation(details, Imputation.HALF);
+			}
+			else
+			{
+				data.addImputation(details);
+			}			
+			calendarModel.calendarData.itemUpdated(data);
+		}
+		
+		[EventHandler(event="ImputationEvent.IMPUTATION_UPDATE", properties="data")]
+		public function handleImputationUpdateEvent(data:Imputation):void
+		{
+			switch(data.quota)
+			{
+				case Imputation.HALF:
+				{
+					var calendarData:CalendarData = calendarModel.removeImputation(data);
+					calendarModel.calendarData.itemUpdated(calendarData);
+					break;
+				}
+					
+				case Imputation.WHOLE:
+				{
+					data.quota = Imputation.HALF;
+					var calData:CalendarData = calendarModel.getCalendarData(data);
+					calendarModel.calendarData.itemUpdated(calData);
+					break;
+				}
+					
+				default:
+				{
+					break;
+				}
+			}
 		}
 	}
 }

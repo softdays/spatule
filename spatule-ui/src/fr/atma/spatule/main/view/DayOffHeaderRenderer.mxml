@@ -17,6 +17,6 @@
 		<s:fill><s:SolidColor color="#999999" /></s:fill>
 	</s:Rect>
 	
-	<s:Image source="@Embed(source='assets/images/sum.png')" verticalCenter="0" horizontalCenter="0"/>
-	
+	<s:Image source="@Embed(source='/assets/images/sum.png')" verticalCenter="0" horizontalCenter="0"/>
+
 </s:GridItemRenderer>

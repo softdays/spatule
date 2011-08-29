@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:GridItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
-					xmlns:s="library://ns.adobe.com/flex/spark" clipAndEnableScrolling="true">
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					clipAndEnableScrolling="false"
+					currentState="editable">
 	
 	<fx:Script>
 		<![CDATA[
+			import fr.atma.spatule.main.model.CalendarModel;
 			import fr.atma.spatule.settings.CalendarSettings;
+			
+			[Inject]
+			public var calendarModel:CalendarModel;
+			
 			override public function prepare(hasBeenRecycled:Boolean):void 
 			{
 				lblData.text = column.headerText;
@@ -17,9 +24,16 @@
 				{
 					bgdSolidColor.color = CalendarSettings.MONTH_1_HEADER_WORKING_DAY_BGD_COLOR;
 				}
+				currentState = calendarModel.isDateLocked(col.date) ? "locked" : "editable";
 			}
 		]]>
 	</fx:Script>
+	
+	<s:states>
+		<s:State name="editable" />
+		<s:State name="locked" />
+		<s:State name="error" />
+	</s:states>
 	
 	<s:Rect width="100%" height="100%">
 		<s:fill>
@@ -27,6 +41,14 @@
 		</s:fill>
 	</s:Rect>
 	
-	<s:Label id="lblData" verticalCenter="1" horizontalCenter="1"/>
+	<s:Label id="lblData" verticalCenter="7" horizontalCenter="1"/>
+	
+	<s:Image source="@Embed(source='/assets/images/checkmark.gif')" 
+			 verticalCenter="-7" horizontalCenter="0"
+			 includeIn="locked" />
+	
+	<s:Image source="@Embed(source='/assets/images/error.gif')" 
+			 verticalCenter="-7" horizontalCenter="0"
+			 includeIn="error" />
 	
 </s:GridItemRenderer>

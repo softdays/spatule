@@ -1,6 +1,7 @@
 package fr.atma.spatule.main.model.vo
 {
 	import mx.collections.ArrayCollection;
+	import mx.collections.IList;
 	
 	import qs.utils.DateUtils;
 
@@ -9,7 +10,7 @@ package fr.atma.spatule.main.model.vo
 		public var projectName:String;
 		
 		[ArrayElementType("fr.atma.spatule.main.model.vo.Imputation")] 
-		public var imputations:ArrayCollection;
+		public var imputations:IList;
 		
 		public function CalendarData()
 		{
@@ -37,6 +38,42 @@ package fr.atma.spatule.main.model.vo
 			}
 			
 			return null;
+		}
+		
+		public function addImputation(date:Date, quota:Number=Imputation.WHOLE):Imputation
+		{
+			var imputation:Imputation = new Imputation();
+			imputation.date = date;
+			imputation.quota = quota;
+			if (imputations == null)
+			{
+				imputations = new ArrayCollection();
+			}
+			imputations.addItem(imputation);
+			
+			return imputation;
+		}
+		
+		public function getWeekImputationsCount(date:Date):Number
+		{
+			var count:Number = 0;
+			if (imputations)
+			{
+				for each (var i:Imputation in imputations)
+				{
+					if (i.date > date) return count;
+					
+					var startDate:Date = new Date(date.fullYear, date.month, date.date-7);
+					
+					if (i.date < startDate) continue;
+					
+					if (i.quota == Imputation.WHOLE) count++;
+					else count+= 0.5;
+					
+				}
+			}
+			
+			return count;
 		}
 	}
 }

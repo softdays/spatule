@@ -34,6 +34,7 @@ package fr.atma.spatule.main.view
 		private static var _dayOffHeaderRenderer:IFactory = new ClassFactory(DayOffHeaderRenderer);
 		private static var _disabledDayHeaderRenderer:IFactory = new ClassFactory(DisabledDayHeaderRenderer);
 		private static var _cellItemRenderer:IFactory = new ClassFactory(CalendarGridCellRenderer);
+		private static var _sumItemRenderer:IFactory = new ClassFactory(SumGridCellRenderer);
 		
 		public function getWorkingWeeksColumns(range:DateRange):IList
 		{
@@ -58,16 +59,19 @@ package fr.atma.spatule.main.view
 				col.date = clone(d);
 				col.isNextMonth = month != d.month;
 				col.width = DATE_COL_WIDTH;	
-				col.itemRenderer = _cellItemRenderer;
+				
 				if (d.day == CalendarSettings.SUNDAY)
 				{
 					col.headerRenderer = _dayOffHeaderRenderer;
+					col.editable = false;
+					col.itemRenderer = _sumItemRenderer;
 				}
 				else 
 				{
 					var dateLabel:String = d.date>9 ? d.date.toString() : "0"+d.date.toString();
 					col.headerText = dateLabel;
 					col.headerRenderer = _workingDayHeaderRenderer;
+					col.itemRenderer = _cellItemRenderer;
 				}					
 				newColumns.addItem(col);
 				
