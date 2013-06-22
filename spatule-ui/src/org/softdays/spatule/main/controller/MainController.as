@@ -14,16 +14,16 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.atma.spatule.main.controller
+package org.softdays.spatule.main.controller
 {
 	import flash.events.IEventDispatcher;
 	
-	import fr.atma.spatule.main.model.CalendarModel;
-	import fr.atma.spatule.main.model.events.ApplicationEvent;
-	import fr.atma.spatule.main.model.events.ImputationEvent;
-	import fr.atma.spatule.main.model.vo.CalendarData;
-	import fr.atma.spatule.main.model.vo.Imputation;
-	import fr.atma.spatule.main.service.ImputationService;
+	import org.softdays.spatule.main.model.CalendarModel;
+	import org.softdays.spatule.main.model.events.ApplicationEvent;
+	import org.softdays.spatule.main.model.events.ImputationEvent;
+	import org.softdays.spatule.main.model.vo.CalendarData;
+	import org.softdays.spatule.main.model.vo.Imputation;
+	import org.softdays.spatule.main.service.ImputationService;
 	
 	import mx.collections.ArrayCollection;
 	import mx.collections.IList;

@@ -21,9 +21,9 @@
 		  initialize="initializeHandler(event)">
 	<fx:Script>
 		<![CDATA[
-			import fr.atma.spatule.main.model.CalendarModel;
-			import fr.atma.spatule.main.model.CalendarBean;
-			import fr.atma.spatule.settings.CalendarSettings;
+			import org.softdays.spatule.main.model.CalendarModel;
+			import org.softdays.spatule.main.model.CalendarBean;
+			import org.softdays.spatule.settings.CalendarSettings;
 			
 			import mx.events.FlexEvent;
 			import mx.events.ItemClickEvent;
@@ -79,7 +79,7 @@
 		
 		<s:RadioButtonGroup id="radioButtonGroupLayoutType"
 							selectedValue="@{calendarModel.currentLayout}"
-							itemClick="updateLayout()"/>
+							itemClick="updateLayout()" enabled="false"/>
 	</fx:Declarations>
 	<s:HGroup width="100%" height="30" horizontalAlign="center" verticalAlign="middle">
 		<s:RadioButton label="Semaines pleines" groupName="radioButtonGroupLayoutType"

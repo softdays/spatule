@@ -1,4 +1,4 @@
-package fr.atma.spatule.main.model.events
+package org.softdays.spatule.main.model.events
 {
 	import flash.events.Event;
 	

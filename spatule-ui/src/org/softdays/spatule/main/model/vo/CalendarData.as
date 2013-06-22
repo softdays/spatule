@@ -1,4 +1,4 @@
-package fr.atma.spatule.main.model.vo
+package org.softdays.spatule.main.model.vo
 {
 	import mx.collections.ArrayCollection;
 	import mx.collections.IList;
@@ -9,7 +9,7 @@ package fr.atma.spatule.main.model.vo
 	{
 		public var projectName:String;
 		
-		[ArrayElementType("fr.atma.spatule.main.model.vo.Imputation")] 
+		[ArrayElementType("org.softdays.spatule.main.model.vo.Imputation")] 
 		public var imputations:IList;
 		
 		public function CalendarData()
@@ -67,13 +67,13 @@ package fr.atma.spatule.main.model.vo
 					
 					if (i.date < startDate) continue;
 					
-					if (i.quota == Imputation.WHOLE) count++;
-					else count+= 0.5;
+					count+= i.quota;
 					
 				}
 			}
 			
 			return count;
 		}
+
 	}
 }

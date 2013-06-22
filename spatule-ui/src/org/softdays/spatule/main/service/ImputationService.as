@@ -1,4 +1,4 @@
-package fr.atma.spatule.main.service
+package org.softdays.spatule.main.service
 {
 	public interface ImputationService
 	{

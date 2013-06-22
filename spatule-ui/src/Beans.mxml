@@ -5,12 +5,14 @@
 				   xmlns:swiz="http://swiz.swizframework.org" 
 				   xmlns:local="*" 
 				   xmlns:utils="qs.utils.*"
-				   xmlns:settings="fr.atma.spatule.settings.*" 
-				   xmlns:view="fr.atma.spatule.main.view.*" 
-				   xmlns:model="fr.atma.spatule.main.model.*" xmlns:service="fr.atma.spatule.main.service.*" xmlns:controller="fr.atma.spatule.main.controller.*">
+				   xmlns:settings="org.softdays.spatule.settings.*" 
+				   xmlns:view="org.softdays.spatule.main.view.*" 
+				   xmlns:model="org.softdays.spatule.main.model.*" 
+				   xmlns:service="org.softdays.spatule.main.service.*" 
+				   xmlns:controller="org.softdays.spatule.main.controller.*">
 	<fx:Script>
 		<![CDATA[
-			import fr.atma.spatule.main.model.CalendarModel;
+			import org.softdays.spatule.main.model.CalendarModel;
 		]]>
 	</fx:Script>
 	

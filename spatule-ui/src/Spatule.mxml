@@ -16,13 +16,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
-			   xmlns:s="library://ns.adobe.com/flex/spark"
-			   xmlns:swiz="http://swiz.swizframework.org"
-			   minWidth="955" minHeight="600"
-			   creationComplete="creationCompleteHandler(event)"
-			   xmlns:local="*"
-			   xmlns:vo="fr.atma.spatule.main.model.vo.*"
-			   xmlns:view="fr.atma.spatule.main.view.*">
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:swiz="http://swiz.swizframework.org"
+               minWidth="955" minHeight="600"
+               creationComplete="creationCompleteHandler(event)"
+               xmlns:local="*"
+               xmlns:view="org.softdays.spatule.main.view.*">
 	<s:layout>
 		<s:VerticalLayout horizontalAlign="center" 
 						  paddingBottom="50" 
@@ -33,7 +32,7 @@
 
 	<fx:Script>
 		<![CDATA[
-			import fr.atma.spatule.main.model.events.ApplicationEvent;
+			import org.softdays.spatule.main.model.events.ApplicationEvent;
 			
 			import mx.events.FlexEvent;
 			
@@ -53,8 +52,8 @@
 		<swiz:Swiz>
 			<swiz:config>
 				<swiz:SwizConfig 
-					eventPackages="fr.atma.spatule.main.model.events"
-					viewPackages="fr.atma.spatule.main.view" />
+					eventPackages="org.softdays.spatule.main.model.events"
+					viewPackages="org.softdays.spatule.main.view" />
 			</swiz:config>
 			<swiz:beanProviders>
 				<local:Beans />

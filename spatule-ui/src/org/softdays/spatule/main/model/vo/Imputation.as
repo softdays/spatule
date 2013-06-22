@@ -1,4 +1,4 @@
-package fr.atma.spatule.main.model.vo
+package org.softdays.spatule.main.model.vo
 {
 	public class Imputation
 	{

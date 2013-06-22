@@ -1,4 +1,4 @@
-package fr.atma.spatule.main.view
+package org.softdays.spatule.main.view
 {
 	import spark.components.gridClasses.GridColumn;
 	

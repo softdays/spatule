@@ -1,14 +1,19 @@
-package fr.atma.spatule.main.model
+package org.softdays.spatule.main.model
 {
-	import fr.atma.spatule.main.model.vo.CalendarData;
-	import fr.atma.spatule.main.model.vo.Imputation;
-	
 	import mx.collections.ArrayCollection;
 	import mx.collections.IList;
+	
+	import org.softdays.spatule.main.model.vo.CalendarData;
+	import org.softdays.spatule.main.model.vo.Imputation;
+	
+	import qs.utils.DateRange;
 
 	[Bindable]
 	public class CalendarModel
 	{
+		[Inject]
+		public var calendarBean:CalendarBean;
+		
 		public static const LAYOUT_FULL_MONTH:String = "LAYOUT_FULL_MONTH";
 		
 		public static const LAYOUT_WORKING_WEEKS:String = "LAYOUT_WORKING_WEEKS";
@@ -17,7 +22,7 @@ package fr.atma.spatule.main.model
 
 		public var currentLayout:Object = null;
 		
-		[ArrayElementType("fr.atma.spatule.main.model.vo.CalendarData")]
+		[ArrayElementType("org.softdays.spatule.main.model.vo.CalendarData")]
 		public var calendarData:IList;
 		
 		public function CalendarModel()
@@ -132,6 +137,43 @@ package fr.atma.spatule.main.model
 			}
 			
 			return imputations;
+		}
+		
+		private function getProjectCalendarData(projectName:String):CalendarData
+		{
+			for each (var calData:CalendarData in calendarData)
+			{
+				if (calData.projectName == projectName) 
+				{
+					return calData;
+				}
+			}
+			
+			return null;
+		}
+		
+		/**
+		 * Fait la somme de toutes les imputations du projet indiqué pour le mois courant.
+		 */
+		public function getMonthImputationsCount(projectName:String):Number
+		{
+			var count:Number = 0;
+			
+			var calData:CalendarData = getProjectCalendarData(projectName);
+			
+			if (calData && calData.imputations)
+			{
+				var range:DateRange = calendarBean.getWorkingWeeksRange(currentDate);
+				for each (var i:Imputation in calData.imputations)
+				{
+					if (range.contains(i.date)) 
+					{
+						count+= i.quota;
+					}
+				}
+			}
+			
+			return count;
 		}
 
 	}

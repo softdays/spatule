@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:WeekSumGridCellRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+							  xmlns:s="library://ns.adobe.com/flex/spark" 
+							  xmlns:view="org.softdays.spatule.main.view.*">
+	
+	<fx:Script>
+		<![CDATA[
+			import org.softdays.spatule.main.model.CalendarModel;
+			import org.softdays.spatule.main.model.vo.CalendarData;
+			import org.softdays.spatule.main.model.vo.Imputation;
+			
+			[Inject]
+			public var calendarModel:CalendarModel;
+			
+			override public function prepare(hasBeenRecycled:Boolean):void 
+			{
+				var col:CalendarGridColumn = column as CalendarGridColumn;
+				var calData:CalendarData = data as CalendarData;
+				var count:Number = calendarModel.getMonthImputationsCount(calData.projectName);
+				labelImputationsCount.text = count.toString();
+			}
+		]]>
+	</fx:Script>
+	
+	
+</view:WeekSumGridCellRenderer>

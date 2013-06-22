@@ -1,8 +1,8 @@
-package fr.atma.spatule.main.view
+package org.softdays.spatule.main.view
 {
-	import fr.atma.spatule.main.model.CalendarBean;
-	import fr.atma.spatule.main.model.CalendarModel;
-	import fr.atma.spatule.settings.CalendarSettings;
+	import org.softdays.spatule.main.model.CalendarBean;
+	import org.softdays.spatule.main.model.CalendarModel;
+	import org.softdays.spatule.settings.CalendarSettings;
 	
 	import mx.collections.ArrayCollection;
 	import mx.collections.IList;
@@ -34,7 +34,9 @@ package fr.atma.spatule.main.view
 		private static var _dayOffHeaderRenderer:IFactory = new ClassFactory(DayOffHeaderRenderer);
 		private static var _disabledDayHeaderRenderer:IFactory = new ClassFactory(DisabledDayHeaderRenderer);
 		private static var _cellItemRenderer:IFactory = new ClassFactory(CalendarGridCellRenderer);
-		private static var _sumItemRenderer:IFactory = new ClassFactory(SumGridCellRenderer);
+		private static var _weekSumItemRenderer:IFactory = new ClassFactory(WeekSumGridCellRenderer);
+		private static var _projectSumItemRenderer:IFactory = new ClassFactory(ProjectSumGridCellRenderer);
+		
 		
 		public function getWorkingWeeksColumns(range:DateRange):IList
 		{
@@ -64,7 +66,7 @@ package fr.atma.spatule.main.view
 				{
 					col.headerRenderer = _dayOffHeaderRenderer;
 					col.editable = false;
-					col.itemRenderer = _sumItemRenderer;
+					col.itemRenderer = _weekSumItemRenderer;
 				}
 				else 
 				{
@@ -81,6 +83,8 @@ package fr.atma.spatule.main.view
 			var totalColumn:GridColumn = new GridColumn();
 			totalColumn.headerText = "Total";
 			totalColumn.width = TOTAL_COL_WIDTH;
+			totalColumn.editable = false;
+			totalColumn.itemRenderer = _projectSumItemRenderer;
 			newColumns.addItem(totalColumn);
 			
 			return newColumns;

@@ -6,8 +6,8 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import fr.atma.spatule.main.model.CalendarModel;
-			import fr.atma.spatule.settings.CalendarSettings;
+			import org.softdays.spatule.main.model.CalendarModel;
+			import org.softdays.spatule.settings.CalendarSettings;
 			
 			[Inject]
 			public var calendarModel:CalendarModel;

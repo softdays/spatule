@@ -1,6 +1,6 @@
-package fr.atma.spatule.main.model
+package org.softdays.spatule.main.model
 {
-	import fr.atma.spatule.settings.CalendarSettings;
+	import org.softdays.spatule.settings.CalendarSettings;
 	
 	import qs.utils.DateRange;
 	import qs.utils.TimeZone;
@@ -22,7 +22,7 @@ package fr.atma.spatule.main.model
 			
 			return new DateRange(
 				getFirstMondayOfTheMonth(date),
-				getNextSunday(date));
+				getLastSunday(date));
 		}
 		
 		public function next(date:Date):Date
@@ -41,7 +41,7 @@ package fr.atma.spatule.main.model
 			return d;
 		}
 		
-		public function getNextSunday(date:Date):Date
+		public function getLastSunday(date:Date):Date
 		{
 			var d:Date = TZ.endOfMonth(date);
 			

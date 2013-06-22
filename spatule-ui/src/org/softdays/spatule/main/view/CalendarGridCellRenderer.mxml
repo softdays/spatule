@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:GridItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 					xmlns:s="library://ns.adobe.com/flex/spark"
-					xmlns:view="fr.atma.spatule.main.view.*"
+					xmlns:view="org.softdays.spatule.main.view.*"
 					useHandCursor="true" buttonMode="true" 
 					currentState="none"
 					click="clickHandler(event)">
 	
 	<fx:Script>
 		<![CDATA[
-			import fr.atma.spatule.main.model.events.ImputationEvent;
-			import fr.atma.spatule.main.model.vo.CalendarData;
-			import fr.atma.spatule.main.model.vo.Imputation;
+			import org.softdays.spatule.main.model.events.ImputationEvent;
+			import org.softdays.spatule.main.model.vo.CalendarData;
+			import org.softdays.spatule.main.model.vo.Imputation;
 			
 			[Dispatcher]
 			public var dispatcher:IEventDispatcher;		
@@ -88,17 +88,19 @@
 		<s:State name="whole" />
 	</s:states>
 	
-	<s:Rect width="100%" height="100%">
-		<s:fill><s:SolidColor color="white" /></s:fill>
-	</s:Rect>
+
 	
-	<s:Line xFrom="3" yFrom="3" xTo="{width-8}" yTo="{height-10}" includeIn="whole, half" verticalCenter="0" horizontalCenter="0">
+	<s:Line xFrom="3" yFrom="3" xTo="{width-8}" yTo="{height-10}" 
+			includeIn="whole, half" 
+			verticalCenter="0" horizontalCenter="0">
 		<s:stroke>
 			<s:SolidColorStroke color="{borderColor}" weight="2"/>
 		</s:stroke>
 	</s:Line>
 	
-	<s:Line xFrom="3" yFrom="{height-10}" xTo="{width-8}" yTo="3" includeIn="whole" verticalCenter="0" horizontalCenter="0">
+	<s:Line xFrom="3" yFrom="{height-10}" xTo="{width-8}" yTo="3" 
+			includeIn="whole" 
+			verticalCenter="0" horizontalCenter="0">
 		<s:stroke>
 			<s:SolidColorStroke color="{borderColor}" weight="3"/>
 		</s:stroke>

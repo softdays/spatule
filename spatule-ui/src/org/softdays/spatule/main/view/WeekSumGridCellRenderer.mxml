@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:GridItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					clipAndEnableScrolling="true">
+	
+	<fx:Script>
+		<![CDATA[
+			import org.softdays.spatule.main.model.vo.CalendarData;
+			import org.softdays.spatule.main.model.vo.Imputation;
+			override public function prepare(hasBeenRecycled:Boolean):void 
+			{
+				var col:CalendarGridColumn = column as CalendarGridColumn;
+				var calData:CalendarData = data as CalendarData;
+				var count:Number = calData.getWeekImputationsCount(col.date);
+				labelImputationsCount.text = count.toString();
+			}
+		]]>
+	</fx:Script>
+	
+	
+	<s:Rect width="100%" height="100%">
+		<s:fill><s:SolidColor color="#a6a6a6" /></s:fill>
+	</s:Rect>
+
+	<s:Label id="labelImputationsCount" verticalCenter="0" horizontalCenter="0" fontSize="10"/>
+	
+</s:GridItemRenderer>

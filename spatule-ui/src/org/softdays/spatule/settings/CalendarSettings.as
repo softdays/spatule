@@ -1,4 +1,4 @@
-package fr.atma.spatule.settings
+package org.softdays.spatule.settings
 {
 	import mx.collections.ArrayCollection;
 	import mx.collections.ArrayList;

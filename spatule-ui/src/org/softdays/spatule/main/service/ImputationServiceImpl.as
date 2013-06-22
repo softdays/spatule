@@ -1,17 +1,17 @@
-package fr.atma.spatule.main.service
+package org.softdays.spatule.main.service
 {
 	import flash.events.IEventDispatcher;
 	
-	import fr.atma.spatule.main.model.events.ImputationEvent;
-	import fr.atma.spatule.main.model.vo.CalendarData;
-	import fr.atma.spatule.main.model.vo.Imputation;
+	import org.softdays.spatule.main.model.events.ImputationEvent;
+	import org.softdays.spatule.main.model.vo.CalendarData;
+	import org.softdays.spatule.main.model.vo.Imputation;
 	
 	import mx.collections.ArrayCollection;
 	import mx.collections.IList;
 
 	public class ImputationServiceImpl implements ImputationService
 	{
-		[ArrayElementType("fr.atma.spatule.main.model.vo.CalendarData")] 
+		[ArrayElementType("org.softdays.spatule.main.model.vo.CalendarData")] 
 		private var mockData:IList = new ArrayCollection([
 			CalendarData.newInstance("LPC2D"),
 			CalendarData.newInstance("LPC1D"),
